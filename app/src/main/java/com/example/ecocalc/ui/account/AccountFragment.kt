@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.anychart.anychart.*
 import com.example.ecocalc.R
 import com.example.ecocalc.data.user.currentUser
 import com.example.ecocalc.databinding.FragmentAccountBinding
@@ -61,10 +62,32 @@ class AccountFragment : Fragment() {
 
         binding.userName.text = currentUser.email
 
+        createChart()
+
         return root
     }
 
-    // TODO возможно тут нет нужен onStart
+    private fun createChart() {
+        val chart: Cartesian = AnyChart.column()
+        chart.setTitle("Yours and world statistics")
+
+        val worldData: ArrayList<DataEntry> = ArrayList()
+        worldData.add(ValueDataEntry("Transport", 550))
+        worldData.add(ValueDataEntry("Food", 780))
+        worldData.add(ValueDataEntry("Plastic eth", 200))
+
+        val userData: ArrayList<DataEntry> = ArrayList()
+        userData.add(ValueDataEntry("Transport", currentUser.transportPrint.toInt() * 100 / 100.0))
+        userData.add(ValueDataEntry("Food", currentUser.mealPrint.toInt() * 100 / 100.0))
+        userData.add(ValueDataEntry("Plastic eth", currentUser.plasticPrint.toInt() * 100 / 100.0))
+
+        chart.column(worldData).setName("World").setColor("green")
+        chart.column(userData).setName("Me")
+        chart.yAxis.setTitle("CO2 kg")
+
+        binding.statisticsImage.setChart(chart)
+    }
+
     override fun onStart() {
         super.onStart()
         when (currentUser.photo) {
@@ -73,6 +96,11 @@ class AccountFragment : Fragment() {
             3 -> binding.userAvatar.setImageResource(R.drawable._avatar_3)
             else -> binding.userAvatar.setImageResource(R.drawable._avatar_4)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        createChart()
     }
 
     override fun onDestroyView() {

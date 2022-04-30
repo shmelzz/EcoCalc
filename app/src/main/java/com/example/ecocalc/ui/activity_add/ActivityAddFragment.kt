@@ -21,10 +21,6 @@ import javax.net.ssl.ManagerFactoryParameters
 
 class ActivityAddFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ActivityAddFragment()
-    }
-
     private lateinit var viewModel: ActivityAddViewModel
     private var _binding: FragmentActivityAddBinding? = null
 
@@ -44,8 +40,6 @@ class ActivityAddFragment : Fragment() {
             setOnClickListener(View.OnClickListener { view ->
                 val dialog = TransportDialog()
                 activity?.supportFragmentManager?.let { dialog.show(it, "transport") }
-                binding.totalCarbonPrintText.text =
-                    "Total carbon print: ${String.format("%.3f", currentUser.carbonPrint)} kg CO2"
             })
         }
 
@@ -53,8 +47,6 @@ class ActivityAddFragment : Fragment() {
             setOnClickListener(View.OnClickListener { view ->
                 val dialog = MealDialog()
                 activity?.supportFragmentManager?.let { dialog.show(it, "meal") }
-                binding.totalCarbonPrintText.text =
-                    "Total carbon print: ${String.format("%.3f", currentUser.carbonPrint)} kg CO2"
             })
         }
 
@@ -62,8 +54,6 @@ class ActivityAddFragment : Fragment() {
             setOnClickListener(View.OnClickListener { view ->
                 val dialog = PlasticDialog()
                 activity?.supportFragmentManager?.let { dialog.show(it, "plastic") }
-                binding.totalCarbonPrintText.text =
-                    "Total carbon print: ${String.format("%.3f", currentUser.carbonPrint)} kg CO2"
             })
         }
 
@@ -84,8 +74,8 @@ class ActivityAddFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         binding.totalCarbonPrintText.text =
             "Total carbon print: ${String.format("%.3f", currentUser.carbonPrint)} kg CO2"
     }
