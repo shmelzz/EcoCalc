@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">EcoCalc</string>
+    <string name="title_account">Account</string>
+    <string name="title_goals">Goals</string>
+    <string name="title_articles">Learn</string>
+    <string name="title_activity_add">Activity</string>
+
+    <string name="article_title">Title</string>
+    <string name="article_content">Content</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="about_app_button_text">About app</string>
+    <string name="goal_complexity">Complexity</string>
+    <string name="goal_title">Goal title</string>
+    <string name="goal_action_button_text">Goal action</string>
+
+    <string name="user_email_name">User email/name</string>
+    <string name="no_fuel_button_text">Walking/Bicycle/Other no fuel</string>
+    <string name="airplane_button_text">Airplane</string>
+    <string name="train_button_text">Train</string>
+    <string name="car_button_text">Car</string>
+    <string name="enter_distance_text">Enter distance (km):</string>
+    <string name="choose_transport_type_text_label">Choose transport type:</string>
+    <string name="choose_date_button">choose date</string>
+    <string name="date_label_text">date</string>
+    <string name="standard_meal">Standard</string>
+    <string name="vegetarian_meal">Vegetarian</string>
+    <string name="vegan_meal">Vegan</string>
+    <string name="meat_meal">Meat</string>
+    <string name="choose_meal_type_text_view">Choose meal type:</string>
+    <string name="choose_new_plastic_bag_type">Choose new plastic bag type:</string>
+    <string name="basic_reusable_bag">Basic reusable bag</string>
+    <string name="strong_bag">Strong bag</string>
+    <string name="one_use_bag">One use bag</string>
+    <string name="paper_bag">Paper bag</string>
+    <string name="get_average_result">get average result</string>
+    <string name="total_carbon_print">Total carbon print:</string>
+    <string name="create_account">create account</string>
+    <string name="explore_tab">explore</string>
+    <string name="in_progress_tab">in progress</string>
+    <string name="finished_tab">finished</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="change_email">Change email</string>
+    <string name="change_password">Change password</string>
+    <string name="change_avatar">Change avatar</string>
+    <string name="news">NEWS</string>
+    <string name="all">all</string>
+    <string name="climate">climate</string>
+    <string name="carbon">carbon</string>
+
+</resources>

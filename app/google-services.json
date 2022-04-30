@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "354235670813",
+    "project_id": "ecocalc-b76e0",
+    "storage_bucket": "ecocalc-b76e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354235670813:android:63f19ae4af5ccf06e081f4",
+        "android_client_info": {
+          "package_name": "com.example.ecocalc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354235670813-k3s1ehtagjn2aa14qn3t276vr3m19228.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB76uVSzCmdN_Ubhn9eaqbnvReUCg1WSA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354235670813-k3s1ehtagjn2aa14qn3t276vr3m19228.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

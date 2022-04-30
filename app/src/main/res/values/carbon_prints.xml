@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="paper_bag_print">5.52</string>
+    <string name="single_use_bag_print">1.58</string>
+    <string name="basic_reusable_bag_print">6.92</string>
+    <string name="strong_reusable_bag_print">21.51</string>
+
+    <string name="standard_meal_print">6.85</string>
+    <string name="meat_meal_print">9.04</string>
+    <string name="vegan_meal_print">4.11</string>
+    <string name="vegetarian_meal_print">4.66</string>
+
+    <string name="car_print_per_km">0.19</string>
+    <string name="airplane_print_per_km">0.15</string>
+    <string name="train_print_per_km">0.41</string>
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:rowCount="2"
+    android:columnCount="2">
+
+
+    <ImageButton
+        android:id="@+id/avatar_1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:adjustViewBounds="true"
+        android:padding="1dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/_avatar_1"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="20dp"/>
+
+    <ImageButton
+        android:id="@+id/avatar_2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:adjustViewBounds="true"
+        android:padding="1dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/_avatar_2"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="20dp"/>
+
+    <ImageButton
+        android:id="@+id/avatar_3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:adjustViewBounds="true"
+        android:padding="1dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/_avatar_3"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="20dp"/>
+
+    <ImageButton
+        android:id="@+id/avatar_4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:adjustViewBounds="true"
+        android:padding="1dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/_avatar_4"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="20dp" />
+</GridLayout>

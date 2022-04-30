@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_activity_add">
+
+    <fragment
+        android:id="@+id/navigation_goals"
+        android:name="com.example.ecocalc.ui.goals.GoalsFragment"
+        android:label="@string/title_goals"
+        tools:layout="@layout/fragment_goals" />
+
+    <fragment
+        android:id="@+id/navigation_activity_add"
+        android:name="com.example.ecocalc.ui.activity_add.ActivityAddFragment"
+        android:label="@string/title_activity_add"
+        tools:layout="@layout/fragment_activity_add" />
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.example.ecocalc.ui.account.AccountFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/fragment_account" />
+
+    <fragment
+        android:id="@+id/navigation_articles"
+        android:name="com.example.ecocalc.ui.articles.ArticlesFragment"
+        android:label="@string/title_articles"
+        tools:layout="@layout/fragment_articles_list" />
+
+</navigation>
