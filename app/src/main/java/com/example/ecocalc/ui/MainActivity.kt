@@ -12,6 +12,7 @@ import com.example.ecocalc.R
 import com.example.ecocalc.data.user.User
 import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
+import com.example.ecocalc.data.utils.setGoals
 import com.example.ecocalc.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
 
         if (intent.extras?.getBoolean("isNewUser") == true) {
+            setGoals()
             val userDao = UserDatabase.getDataBase(application).userDao()
             userDao.addUser(currentUser)
         } else {

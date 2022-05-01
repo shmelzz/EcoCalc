@@ -23,7 +23,8 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="21dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="9dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/goal_button"
             android:text="@string/goal_title"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -49,11 +50,9 @@
             android:layout_alignParentTop="true"
 
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="150dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
 
-            android:layout_toEndOf="@+id/goal_complexity"
             android:drawablePadding="2dp"
             android:text="@string/goal_action_button_text" />
     </RelativeLayout>

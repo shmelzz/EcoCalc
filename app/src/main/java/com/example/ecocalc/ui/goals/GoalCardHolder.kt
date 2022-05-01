@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecocalc.data.enums.GoalProgress
+import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
 import com.example.ecocalc.data.utils.Goal
 import com.example.ecocalc.databinding.GoalCardBinding

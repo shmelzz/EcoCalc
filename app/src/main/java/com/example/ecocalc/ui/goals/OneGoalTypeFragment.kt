@@ -31,38 +31,41 @@ class OneGoalTypeFragment(goalProgress: GoalProgress) : Fragment() {
         _binding = FragmentGoalListBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        if (currentUser.achievedGoals.isEmpty() && currentUser.inProgressGoals.isEmpty()
-            && currentUser.goalsToExplore.isEmpty()
-        ) {
-            setGoals()
-            val userDao = UserDatabase.getDataBase(requireActivity().application).userDao()
-            userDao.updateUsers(currentUser)
-        }
+        val userDao =
+            UserDatabase.getDataBase(requireActivity().application).userDao()
+        userDao.updateUsers(currentUser)
 
+        updateGoalsList()
+
+        return root
+    }
+
+    private fun updateGoalsList() {
         when (fragmentGoalProgress) {
             GoalProgress.EXPLORE -> {
                 binding.goalsList.apply {
                     layoutManager = LinearLayoutManager(context)
-                    // TODO
                     adapter = GoalCardAdapter(currentUser.goalsToExplore)
                 }
             }
             GoalProgress.IN_PROGRESS -> {
                 binding.goalsList.apply {
                     layoutManager = LinearLayoutManager(context)
-                    // TODO
                     adapter = GoalCardAdapter(currentUser.inProgressGoals)
                 }
             }
             else -> {
                 binding.goalsList.apply {
                     layoutManager = LinearLayoutManager(context)
-                    // TODO
                     adapter = GoalCardAdapter(currentUser.achievedGoals)
                 }
             }
         }
-        return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateGoalsList()
     }
 
 
