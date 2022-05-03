@@ -17,6 +17,7 @@
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/drawable/settings_icon.xml" value="0.2703125" />
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/added_activity_card.xml" value="0.2368659420289855" />
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/article_card.xml" value="0.43884892086330934" />
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/avatar.xml" value="0.25416666666666665" />
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/avatar_change_dialog_layout.xml" value="0.25" />
@@ -25,7 +26,7 @@
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/edit_password_dialog_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/edit_text_dialog_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/fragment_account.xml" value="0.2" />
-        <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/fragment_activity_add.xml" value="0.264" />
+        <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/fragment_activity_add.xml" value="0.25" />
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/fragment_articles.xml" value="0.1" />
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/fragment_articles_list.xml" value="0.25416666666666665" />
         <entry key="..\:/kak stat umnm/2course/EcoCalc/app/src/main/res/layout/fragment_first.xml" value="0.25416666666666665" />

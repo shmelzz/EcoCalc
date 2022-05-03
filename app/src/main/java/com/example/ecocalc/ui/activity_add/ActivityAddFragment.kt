@@ -14,6 +14,7 @@ import com.example.ecocalc.data.user.currentUser
 import com.example.ecocalc.data.utils.articleList
 import com.example.ecocalc.databinding.FragmentActivityAddBinding
 import com.example.ecocalc.databinding.FragmentArticlesBinding
+import com.example.ecocalc.ui.dialog.AddedActivitiesDialog
 import com.example.ecocalc.ui.dialog.MealDialog
 import com.example.ecocalc.ui.dialog.PlasticDialog
 import com.example.ecocalc.ui.dialog.TransportDialog
@@ -62,6 +63,27 @@ class ActivityAddFragment : Fragment() {
                 val openURL = Intent(Intent.ACTION_VIEW)
                 openURL.data = Uri.parse("http://www.footprintcalculator.org/home/en")
                 startActivity(openURL)
+            })
+        }
+
+        binding.mealAddedButton.apply {
+            setOnClickListener(View.OnClickListener { view ->
+                val dialog = AddedActivitiesDialog("MEAL")
+                activity?.supportFragmentManager?.let { dialog.show(it, "added meals") }
+            })
+        }
+
+        binding.transportAddedButton.apply {
+            setOnClickListener(View.OnClickListener { view ->
+                val dialog = AddedActivitiesDialog("TRANSPORT")
+                activity?.supportFragmentManager?.let { dialog.show(it, "added transport") }
+            })
+        }
+
+        binding.plasticAddedButton.apply {
+            setOnClickListener(View.OnClickListener { view ->
+                val dialog = AddedActivitiesDialog("PLASTIC")
+                activity?.supportFragmentManager?.let { dialog.show(it, "added plastic") }
             })
         }
 

@@ -70,5 +70,6 @@
     <string name="all">all</string>
     <string name="climate">climate</string>
     <string name="carbon">carbon</string>
+    <string name="watch_added">Watch added</string>
 
 </resources>
