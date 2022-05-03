@@ -20,7 +20,6 @@ import com.google.firebase.ktx.Firebase
 
 class AccountFragment : Fragment() {
 
-    private lateinit var accountViewModel: AccountViewModel
     private var _binding: FragmentAccountBinding? = null
 
     private val binding get() = _binding!!
@@ -32,8 +31,7 @@ class AccountFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        accountViewModel =
-            ViewModelProvider(this).get(AccountViewModel::class.java)
+
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

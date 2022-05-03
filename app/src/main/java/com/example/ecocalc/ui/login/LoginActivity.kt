@@ -17,7 +17,6 @@ import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
 
     private lateinit var auth: FirebaseAuth
@@ -44,24 +43,22 @@ class LoginActivity : AppCompatActivity() {
         val createAccountButton = binding.createAccountButton
         val aboutButton = binding.aboutApp
 
-        with(binding) {
-            signInButton.setOnClickListener(View.OnClickListener { view ->
-                val email = binding.username.text.toString()
-                val enteredPassword = binding.password.text.toString()
-                signIn(email, enteredPassword)
-            })
+        signInButton.setOnClickListener(View.OnClickListener { view ->
+            val email = binding.username.text.toString()
+            val enteredPassword = binding.password.text.toString()
+            signIn(email, enteredPassword)
+        })
 
-            createAccountButton!!.setOnClickListener(View.OnClickListener { view ->
-                val email = binding.username.text.toString()
-                val password = binding.password.text.toString()
-                createAccount(email, password)
-            })
+        createAccountButton!!.setOnClickListener(View.OnClickListener { view ->
+            val email = binding.username.text.toString()
+            val password = binding.password.text.toString()
+            createAccount(email, password)
+        })
 
-            aboutButton?.setOnClickListener(View.OnClickListener { view ->
-                val aboutDialog = AboutDialog()
-                supportFragmentManager.let { aboutDialog.show(it, "about") }
-            })
-        }
+        aboutButton?.setOnClickListener(View.OnClickListener { view ->
+            val aboutDialog = AboutDialog()
+            supportFragmentManager.let { aboutDialog.show(it, "about") }
+        })
 
         auth = Firebase.auth
     }

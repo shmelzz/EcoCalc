@@ -20,7 +20,6 @@ class GoalsFragment : Fragment() {
         "Finished"
     )
 
-    private lateinit var goalsViewModel: GoalsViewModel
     private var _binding: FragmentGoalsBinding? = null
 
     private lateinit var adapter: GoalsFragmentAdapter
@@ -34,8 +33,6 @@ class GoalsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        goalsViewModel =
-            ViewModelProvider(this).get(GoalsViewModel::class.java)
         _binding = FragmentGoalsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

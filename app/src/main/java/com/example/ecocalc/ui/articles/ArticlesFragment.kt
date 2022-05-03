@@ -20,7 +20,6 @@ class ArticlesFragment : Fragment() {
         "Climate"
     )
 
-    private lateinit var articlesViewModel: ArticlesViewModel
     private var _binding: FragmentArticlesBinding? = null
 
     private lateinit var viewPager: ViewPager2
@@ -34,8 +33,6 @@ class ArticlesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        articlesViewModel =
-            ViewModelProvider(this).get(ArticlesViewModel::class.java)
         _binding = FragmentArticlesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

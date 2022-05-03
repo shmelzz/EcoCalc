@@ -22,7 +22,6 @@ import javax.net.ssl.ManagerFactoryParameters
 
 class ActivityAddFragment : Fragment() {
 
-    private lateinit var viewModel: ActivityAddViewModel
     private var _binding: FragmentActivityAddBinding? = null
 
     private val binding get() = _binding!!
@@ -32,7 +31,6 @@ class ActivityAddFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(ActivityAddViewModel::class.java)
         _binding = FragmentActivityAddBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
@@ -88,12 +86,6 @@ class ActivityAddFragment : Fragment() {
         }
 
         return root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ActivityAddViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     override fun onResume() {
