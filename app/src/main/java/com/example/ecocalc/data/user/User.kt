@@ -20,7 +20,6 @@ class User {
     var mealPrint: Double = 0.1
     var plasticPrint: Double = 0.1
 
-
     var transportActivities: ArrayList<TransportActivity> = arrayListOf()
     var mealActivities: ArrayList<MealActivity> = arrayListOf()
     var plasticActivities: ArrayList<PlasticActivity> = arrayListOf()
