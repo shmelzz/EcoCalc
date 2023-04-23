@@ -11,12 +11,14 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.example.ecocalc.R
 import com.example.ecocalc.data.enums.MealType
 import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
 import com.example.ecocalc.data.user_activity.MealActivity
 import com.example.ecocalc.ui.dialog.utils.getActivityDate
+import kotlinx.coroutines.*
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -65,10 +67,14 @@ class MealDialog : DialogFragment() {
             builder.setView(mealView)
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, id ->
-                        addMealActivity(radioGroup, dateText)
+                        lifecycleScope.launch {
+                            addMealActivity(radioGroup, dateText)
+                        }
                         val userDao =
                             UserDatabase.getDataBase(requireActivity().application).userDao()
-                        userDao.updateUsers(currentUser)
+                        lifecycleScope.launch {
+                            userDao.updateUsers(currentUser)
+                        }
                         getDialog()?.cancel()
                     })
                 .setNegativeButton("Cancel",
@@ -80,7 +86,7 @@ class MealDialog : DialogFragment() {
     }
 
 
-    private fun addMealActivity(
+    private suspend fun addMealActivity(
         radioGroup: RadioGroup,
         dateText: TextView
     ) {
@@ -93,7 +99,7 @@ class MealDialog : DialogFragment() {
 
         when (resources.getResourceEntryName(mealTypeId)) {
             "radio_standard" -> {
-                 activity =  MealActivity(
+                activity = MealActivity(
                     currentId, currentUser.email, getActivityDate(dateText), MealType.STANDARD,
                     6.85
                 )

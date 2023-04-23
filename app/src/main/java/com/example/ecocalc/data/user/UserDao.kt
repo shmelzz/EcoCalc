@@ -12,13 +12,13 @@ import com.example.ecocalc.data.user_activity.TransportActivity
 interface UserDao {
 
     @Insert
-    fun addUser(user: User)
+    suspend fun addUser(user: User)
 
     @Query("SELECT * FROM USERS_TABLE WHERE EMAIL = :email")
     fun readUserData(email: String): User
 
     @Update
-    fun updateUsers(user: User)
+    suspend fun updateUsers(user: User)
 
     @Query("SELECT * FROM meal_table WHERE userId = :email")
     fun readMealActivitiesForUser(email: String): List<MealActivity>
@@ -30,11 +30,11 @@ interface UserDao {
     fun readPlasticActivitiesForUser(email: String): List<PlasticActivity>
 
     @Insert
-    fun addPlasticActivity(PlasticActivity: PlasticActivity)
+    suspend fun addPlasticActivity(PlasticActivity: PlasticActivity)
 
     @Insert
-    fun addTransportActivity(transportActivity: TransportActivity)
+    suspend fun addTransportActivity(transportActivity: TransportActivity)
 
     @Insert
-    fun addMealActivity(mealActivity: MealActivity)
+    suspend fun addMealActivity(mealActivity: MealActivity)
 }

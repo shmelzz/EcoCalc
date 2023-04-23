@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecocalc.data.enums.GoalProgress
 import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
 import com.example.ecocalc.data.utils.setGoals
 import com.example.ecocalc.databinding.FragmentGoalListBinding
+import kotlinx.coroutines.launch
 
 class OneGoalTypeFragment(goalProgress: GoalProgress) : Fragment() {
     // private lateinit var articlesViewModel: ArticlesViewModel
@@ -33,7 +35,9 @@ class OneGoalTypeFragment(goalProgress: GoalProgress) : Fragment() {
 
         val userDao =
             UserDatabase.getDataBase(requireActivity().application).userDao()
-        userDao.updateUsers(currentUser)
+        lifecycleScope.launch {
+            userDao.updateUsers(currentUser)
+        }
 
         updateGoalsList()
 

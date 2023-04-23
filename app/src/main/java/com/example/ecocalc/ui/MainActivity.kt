@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -12,9 +13,9 @@ import com.example.ecocalc.R
 import com.example.ecocalc.data.user.User
 import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
-import com.example.ecocalc.data.user_activity.MealActivity
 import com.example.ecocalc.data.utils.setGoals
 import com.example.ecocalc.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,7 +54,9 @@ class MainActivity : AppCompatActivity() {
         if (intent.extras?.getBoolean("isNewUser") == true) {
             setGoals()
             val userDao = UserDatabase.getDataBase(application).userDao()
-            userDao.addUser(currentUser)
+            lifecycleScope.launch {
+                userDao.addUser(currentUser)
+            }
         } else {
             val userDao = UserDatabase.getDataBase(application).userDao()
             val email = intent.extras?.getString("username").toString()

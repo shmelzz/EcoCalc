@@ -9,9 +9,11 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.example.ecocalc.R
 import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
+import kotlinx.coroutines.launch
 
 class AvatarDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -33,7 +35,9 @@ class AvatarDialog : DialogFragment() {
                 avatar.setImageResource(R.drawable._avatar_1)
 
                 val userDao = UserDatabase.getDataBase(requireActivity().application).userDao()
-                userDao.updateUsers(currentUser)
+                lifecycleScope.launch {
+                    userDao.updateUsers(currentUser)
+                }
 
                 dialog?.cancel()
             })
@@ -44,7 +48,9 @@ class AvatarDialog : DialogFragment() {
                 avatar.setImageResource(R.drawable._avatar_2)
 
                 val userDao = UserDatabase.getDataBase(requireActivity().application).userDao()
-                userDao.updateUsers(currentUser)
+                lifecycleScope.launch {
+                    userDao.updateUsers(currentUser)
+                }
 
                 dialog?.cancel()
             })
@@ -55,7 +61,9 @@ class AvatarDialog : DialogFragment() {
                 avatar.setImageResource(R.drawable._avatar_3)
 
                 val userDao = UserDatabase.getDataBase(requireActivity().application).userDao()
-                userDao.updateUsers(currentUser)
+                lifecycleScope.launch {
+                    userDao.updateUsers(currentUser)
+                }
 
                 dialog?.cancel()
             })
@@ -66,7 +74,9 @@ class AvatarDialog : DialogFragment() {
                 avatar.setImageResource(R.drawable._avatar_4)
 
                 val userDao = UserDatabase.getDataBase(requireActivity().application).userDao()
-                userDao.updateUsers(currentUser)
+                lifecycleScope.launch {
+                    userDao.updateUsers(currentUser)
+                }
 
                 dialog?.cancel()
             })

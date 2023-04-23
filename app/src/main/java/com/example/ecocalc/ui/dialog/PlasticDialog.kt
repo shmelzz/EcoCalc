@@ -11,12 +11,14 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.example.ecocalc.R
 import com.example.ecocalc.data.enums.PlasticType
 import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
 import com.example.ecocalc.data.user_activity.PlasticActivity
 import com.example.ecocalc.ui.dialog.utils.getActivityDate
+import kotlinx.coroutines.launch
 import java.util.*
 
 class PlasticDialog : DialogFragment() {
@@ -61,11 +63,14 @@ class PlasticDialog : DialogFragment() {
             builder.setView(plasticView)
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, id ->
-                        addPlasticActivity(radioGroup, dateText)
+                        lifecycleScope.launch {
+                            addPlasticActivity(radioGroup, dateText)
+                        }
                         val userDao =
                             UserDatabase.getDataBase(requireActivity().application).userDao()
-                        userDao.updateUsers(currentUser)
-
+                        lifecycleScope.launch {
+                            userDao.updateUsers(currentUser)
+                        }
                         getDialog()?.cancel()
                     })
                 .setNegativeButton("Cancel",
@@ -76,7 +81,7 @@ class PlasticDialog : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    private fun addPlasticActivity(
+    private suspend fun addPlasticActivity(
         radioGroup: RadioGroup,
         dateText: TextView
     ) {

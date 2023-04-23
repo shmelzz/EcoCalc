@@ -13,12 +13,14 @@ import android.widget.TextClock
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.example.ecocalc.R
 import com.example.ecocalc.data.enums.TransportType
 import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
 import com.example.ecocalc.data.user_activity.TransportActivity
 import com.example.ecocalc.ui.dialog.utils.getActivityDate
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -66,10 +68,14 @@ class TransportDialog : DialogFragment() {
             builder.setView(transportView)
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, id ->
-                        addTransportActivity(radioGroup, dateText, kmText)
+                        lifecycleScope.launch {
+                            addTransportActivity(radioGroup, dateText, kmText)
+                        }
                         val userDao =
                             UserDatabase.getDataBase(requireActivity().application).userDao()
-                        userDao.updateUsers(currentUser)
+                        lifecycleScope.launch {
+                            userDao.updateUsers(currentUser)
+                        }
                         getDialog()?.cancel()
                     })
                 .setNegativeButton("Cancel",
@@ -81,7 +87,7 @@ class TransportDialog : DialogFragment() {
     }
 
 
-    private fun addTransportActivity(
+    private suspend fun addTransportActivity(
         radioGroup: RadioGroup,
         dateText: TextView,
         kmTextView: TextView
