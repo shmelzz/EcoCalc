@@ -1,6 +1,9 @@
 package com.example.ecocalc.data.user
 
 import androidx.room.TypeConverter
+import com.example.ecocalc.data.enums.MealType
+import com.example.ecocalc.data.enums.PlasticType
+import com.example.ecocalc.data.enums.TransportType
 import com.example.ecocalc.data.user_activity.MealActivity
 import com.example.ecocalc.data.user_activity.PlasticActivity
 import com.example.ecocalc.data.user_activity.TransportActivity
@@ -12,26 +15,32 @@ import kotlinx.serialization.json.Json
 class Converters {
 
     @TypeConverter
-    fun fromListGoal(value: ArrayList<Goal>) = Json.encodeToString(value)
+    fun fromMealType(type: MealType): String {
+        return type.name
+    }
 
     @TypeConverter
-    fun toListGoal(value: String) = Json.decodeFromString<ArrayList<Goal>>(value)
+    fun toMealType(type: String): MealType {
+        return MealType.valueOf(type)
+    }
 
     @TypeConverter
-    fun fromListTransport(value: ArrayList<TransportActivity>) = Json.encodeToString(value)
+    fun fromTransportType(type: TransportType): String {
+        return type.name
+    }
 
     @TypeConverter
-    fun toListTransport(value: String) = Json.decodeFromString<ArrayList<TransportActivity>>(value)
+    fun toTransportType(type: String): TransportType {
+        return TransportType.valueOf(type)
+    }
 
     @TypeConverter
-    fun fromListMeal(value: ArrayList<MealActivity>) = Json.encodeToString(value)
+    fun fromPlasticType(type: PlasticType): String {
+        return type.name
+    }
 
     @TypeConverter
-    fun toListMeal(value: String) = Json.decodeFromString<ArrayList<MealActivity>>(value)
-
-    @TypeConverter
-    fun fromListPlastic(value: ArrayList<PlasticActivity>) = Json.encodeToString(value)
-
-    @TypeConverter
-    fun toListPlastic(value: String) = Json.decodeFromString<ArrayList<PlasticActivity>>(value)
+    fun toPlasticType(type: String): PlasticType {
+        return PlasticType.valueOf(type)
+    }
 }

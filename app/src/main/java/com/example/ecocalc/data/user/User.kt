@@ -1,6 +1,7 @@
 package com.example.ecocalc.data.user
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.example.ecocalc.data.user_activity.MealActivity
 import com.example.ecocalc.data.user_activity.PlasticActivity
@@ -20,11 +21,11 @@ class User {
     var mealPrint: Double = 0.1
     var plasticPrint: Double = 0.1
 
-    var transportActivities: ArrayList<TransportActivity> = arrayListOf()
-    var mealActivities: ArrayList<MealActivity> = arrayListOf()
-    var plasticActivities: ArrayList<PlasticActivity> = arrayListOf()
+    @Ignore var transportActivities: ArrayList<TransportActivity> = arrayListOf()
+    @Ignore var mealActivities: ArrayList<MealActivity> = arrayListOf()
+    @Ignore var plasticActivities: ArrayList<PlasticActivity> = arrayListOf()
 
-    var goalsToExplore: ArrayList<Goal> = arrayListOf()
-    var achievedGoals: ArrayList<Goal> = arrayListOf()
-    var inProgressGoals: ArrayList<Goal> = arrayListOf()
+    @Ignore var goalsToExplore: ArrayList<Goal> = arrayListOf()
+    @Ignore var achievedGoals: ArrayList<Goal> = arrayListOf()
+    @Ignore var inProgressGoals: ArrayList<Goal> = arrayListOf()
 }

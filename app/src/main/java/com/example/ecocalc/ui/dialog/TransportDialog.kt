@@ -87,48 +87,69 @@ class TransportDialog : DialogFragment() {
         kmTextView: TextView
     ) {
         val transportTypeId = radioGroup.checkedRadioButtonId
-        val currentId: Int = currentUser.transportActivities.size
-
+        val currentId = UUID.randomUUID()
+        val userDao =
+            UserDatabase.getDataBase(requireActivity().application).userDao()
         val km: Double = kmTextView.text.toString().toDouble()
+
+        val activity: TransportActivity
 
         when (resources.getResourceEntryName(transportTypeId)) {
             "radio_car" -> {
-                currentUser.transportActivities.add(
-                    TransportActivity(
-                        currentId, getActivityDate(dateText), TransportType.CAR, km,
-                        0.19 * km, false
-                    )
+                activity = TransportActivity(
+                    currentId,
+                    currentUser.email,
+                    getActivityDate(dateText),
+                    TransportType.CAR,
+                    km,
+                    0.19 * km,
+                    false
                 )
+                currentUser.transportActivities.add(activity)
+                userDao.addTransportActivity(activity)
                 currentUser.transportPrint += 0.19 * km
                 currentUser.carbonPrint += 0.19 * km
             }
             "radio_train" -> {
-                currentUser.transportActivities.add(
-                    TransportActivity(
-                        currentId, getActivityDate(dateText), TransportType.TRAIN, km,
-                        0.41 * km, false
-                    )
+                activity = TransportActivity(
+                    currentId,
+                    currentUser.email,
+                    getActivityDate(dateText),
+                    TransportType.TRAIN, km,
+                    0.41 * km,
+                    false
                 )
+                currentUser.transportActivities.add(activity)
+                userDao.addTransportActivity(activity)
                 currentUser.transportPrint += 0.41 * km
                 currentUser.carbonPrint += 0.41 * km
             }
             "radio_airplane" -> {
-                currentUser.transportActivities.add(
-                    TransportActivity(
-                        currentId, getActivityDate(dateText), TransportType.AIRPLANE, km,
-                        0.15 * km, false
-                    )
+                activity = TransportActivity(
+                    currentId, currentUser.email,
+                    getActivityDate(dateText),
+                    TransportType.AIRPLANE,
+                    km,
+                    0.15 * km,
+                    false
                 )
+                currentUser.transportActivities.add(activity)
+                userDao.addTransportActivity(activity)
                 currentUser.transportPrint += 0.15 * km
                 currentUser.carbonPrint += 0.15 * km
             }
             "radio_no_fuel" -> {
-                currentUser.transportActivities.add(
-                    TransportActivity(
-                        currentId, getActivityDate(dateText), TransportType.ECO_MOVE, km,
-                        0.0, false
-                    )
+                activity = TransportActivity(
+                    currentId,
+                    currentUser.email,
+                    getActivityDate(dateText),
+                    TransportType.ECO_MOVE,
+                    km,
+                    0.0,
+                    false
                 )
+                currentUser.transportActivities.add(activity)
+                userDao.addTransportActivity(activity)
             }
         }
     }

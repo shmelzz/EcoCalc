@@ -1,12 +1,17 @@
 package com.example.ecocalc.data.user_activity
 
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 import com.example.ecocalc.data.enums.TransportType
 import kotlinx.serialization.Serializable
 import java.util.*
 
-@Serializable
+@Entity(tableName = "transport_table")
 data class TransportActivity(
-    val id: Int,
+    @PrimaryKey
+    val id: UUID,
+    val userId: String,
     val date: String,
     val type: TransportType,
     val distanceKilometres: Double,

@@ -21,6 +21,7 @@ import java.util.*
 import kotlin.math.roundToInt
 
 class MealDialog : DialogFragment() {
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
@@ -84,52 +85,59 @@ class MealDialog : DialogFragment() {
         dateText: TextView
     ) {
         val mealTypeId = radioGroup.checkedRadioButtonId
-        val currentId: Int = currentUser.mealActivities.size
+        val currentId = UUID.randomUUID()
+        val activity: MealActivity
+
+        val userDao =
+            UserDatabase.getDataBase(requireActivity().application).userDao()
 
         when (resources.getResourceEntryName(mealTypeId)) {
             "radio_standard" -> {
-                currentUser.mealActivities.add(
-                    MealActivity(
-                        currentId, getActivityDate(dateText), MealType.STANDARD,
-                        6.85
-                    )
+                 activity =  MealActivity(
+                    currentId, currentUser.email, getActivityDate(dateText), MealType.STANDARD,
+                    6.85
                 )
+                currentUser.mealActivities.add(activity)
+                userDao.addMealActivity(activity)
                 currentUser.mealPrint += 6.85
                 currentUser.carbonPrint += 6.85
             }
             "radio_vegetarian" -> {
-                currentUser.mealActivities.add(
-                    MealActivity(
-                        currentId,
-                        getActivityDate(dateText),
-                        MealType.VEGETARIAN,
-                        4.66
-                    )
+                activity = MealActivity(
+                    currentId,
+                    currentUser.email,
+                    getActivityDate(dateText),
+                    MealType.VEGETARIAN,
+                    4.66
                 )
+                currentUser.mealActivities.add(activity)
+                userDao.addMealActivity(activity)
                 currentUser.mealPrint += 4.66
                 currentUser.carbonPrint += 4.66
             }
             "radio_vegan" -> {
-                currentUser.mealActivities.add(
-                    MealActivity(
-                        currentId,
-                        getActivityDate(dateText),
-                        MealType.VEGAN,
-                        4.11
-                    )
+                activity = MealActivity(
+                    currentId,
+                    currentUser.email,
+                    getActivityDate(dateText),
+                    MealType.VEGAN,
+                    4.11
                 )
+                currentUser.mealActivities.add(activity)
+                userDao.addMealActivity(activity)
                 currentUser.mealPrint += 4.11
                 currentUser.carbonPrint += 4.11
             }
             "radio_meat" -> {
-                currentUser.mealActivities.add(
-                    MealActivity(
-                        currentId,
-                        getActivityDate(dateText),
-                        MealType.MEAT,
-                        9.04
-                    )
+                activity = MealActivity(
+                    currentId,
+                    currentUser.email,
+                    getActivityDate(dateText),
+                    MealType.MEAT,
+                    9.04
                 )
+                currentUser.mealActivities.add(activity)
+                userDao.addMealActivity(activity)
                 currentUser.mealPrint += 9.04
                 currentUser.carbonPrint += 9.04
             }

@@ -1,12 +1,16 @@
 package com.example.ecocalc.data.user_activity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.ecocalc.data.enums.MealType
 import kotlinx.serialization.Serializable
 import java.util.*
 
-@Serializable
+@Entity(tableName = "meal_table")
 data class MealActivity(
-    val id: Int,
+    @PrimaryKey
+    val id: UUID,
+    val userId: String,
     val date: String,
     val type: MealType,
     val carbonInput: Double

@@ -81,46 +81,61 @@ class PlasticDialog : DialogFragment() {
         dateText: TextView
     ) {
         val plasticTypeId = radioGroup.checkedRadioButtonId
-        val currentId: Int = currentUser.plasticActivities.size
+        val currentId = UUID.randomUUID()
+
+        val userDao =
+            UserDatabase.getDataBase(requireActivity().application).userDao()
 
         when (resources.getResourceEntryName(plasticTypeId)) {
             "radio_standard_bag" -> {
-                currentUser.plasticActivities.add(
-                    PlasticActivity(
-                        currentId, getActivityDate(dateText), PlasticType.STANDARD,
-                        6.92
-                    )
+                val activity = PlasticActivity(
+                    currentId,
+                    currentUser.email,
+                    getActivityDate(dateText),
+                    PlasticType.STANDARD,
+                    6.92
                 )
+                currentUser.plasticActivities.add(activity)
+                userDao.addPlasticActivity(activity)
                 currentUser.plasticPrint += 6.92
                 currentUser.carbonPrint += 6.92
             }
             "radio_strong_bag" -> {
-                currentUser.plasticActivities.add(
-                    PlasticActivity(
-                        currentId, getActivityDate(dateText), PlasticType.STRONG,
-                        21.51
-                    )
+                val activity = PlasticActivity(
+                    currentId,
+                    currentUser.email,
+                    getActivityDate(dateText),
+                    PlasticType.STRONG,
+                    21.51
                 )
+                currentUser.plasticActivities.add(activity)
+                userDao.addPlasticActivity(activity)
                 currentUser.plasticPrint += 21.51
                 currentUser.carbonPrint += 21.51
             }
             "radio_one_use_bag" -> {
-                currentUser.plasticActivities.add(
-                    PlasticActivity(
-                        currentId, getActivityDate(dateText), PlasticType.ONE_USE,
-                        1.58
-                    )
+                val activity = PlasticActivity(
+                    currentId,
+                    currentUser.email,
+                    getActivityDate(dateText),
+                    PlasticType.ONE_USE,
+                    1.58
                 )
+                currentUser.plasticActivities.add(activity)
+                userDao.addPlasticActivity(activity)
                 currentUser.plasticPrint += 1.58
                 currentUser.carbonPrint += 1.58
             }
             "radio_paper_bag" -> {
-                currentUser.plasticActivities.add(
-                    PlasticActivity(
-                        currentId, getActivityDate(dateText), PlasticType.PAPER,
-                        5.52
-                    )
+                val activity = PlasticActivity(
+                    currentId,
+                    currentUser.email,
+                    getActivityDate(dateText),
+                    PlasticType.PAPER,
+                    5.52
                 )
+                currentUser.plasticActivities.add(activity)
+                userDao.addPlasticActivity(activity)
                 currentUser.plasticPrint += 5.52
                 currentUser.carbonPrint += 5.52
             }

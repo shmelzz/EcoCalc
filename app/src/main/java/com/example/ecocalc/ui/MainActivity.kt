@@ -12,6 +12,7 @@ import com.example.ecocalc.R
 import com.example.ecocalc.data.user.User
 import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
+import com.example.ecocalc.data.user_activity.MealActivity
 import com.example.ecocalc.data.utils.setGoals
 import com.example.ecocalc.databinding.ActivityMainBinding
 
@@ -55,7 +56,11 @@ class MainActivity : AppCompatActivity() {
             userDao.addUser(currentUser)
         } else {
             val userDao = UserDatabase.getDataBase(application).userDao()
-            currentUser = userDao.readUserData(intent.extras?.getString("username").toString())
+            val email = intent.extras?.getString("username").toString()
+            currentUser = userDao.readUserData(email)
+            currentUser.mealActivities.addAll(userDao.readMealActivitiesForUser(email))
+            currentUser.transportActivities.addAll(userDao.readTransportActivitiesForUser(email))
+            currentUser.plasticActivities.addAll(userDao.readPlasticActivitiesForUser(email))
         }
     }
 }
