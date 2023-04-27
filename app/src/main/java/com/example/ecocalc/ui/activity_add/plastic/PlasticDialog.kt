@@ -1,4 +1,4 @@
-package com.example.ecocalc.ui.dialog
+package com.example.ecocalc.ui.activity_add.plastic
 
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -17,11 +17,12 @@ import com.example.ecocalc.data.enums.PlasticType
 import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
 import com.example.ecocalc.data.user_activity.PlasticActivity
+import com.example.ecocalc.ui.activity_add.transport.TransportDialogViewModel
 import com.example.ecocalc.ui.dialog.utils.getActivityDate
 import kotlinx.coroutines.launch
 import java.util.*
 
-class PlasticDialog : DialogFragment() {
+class PlasticDialog(private val plasticDialogViewModel: PlasticDialogViewModel) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
@@ -63,14 +64,7 @@ class PlasticDialog : DialogFragment() {
             builder.setView(plasticView)
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, id ->
-                        lifecycleScope.launch {
-                            addPlasticActivity(radioGroup, dateText)
-                        }
-                        val userDao =
-                            UserDatabase.getDataBase(requireActivity().application).userDao()
-                        lifecycleScope.launch {
-                            userDao.updateUsers(currentUser)
-                        }
+                        addPlasticActivity(radioGroup, dateText)
                         getDialog()?.cancel()
                     })
                 .setNegativeButton("Cancel",
@@ -81,15 +75,12 @@ class PlasticDialog : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    private suspend fun addPlasticActivity(
+    private fun addPlasticActivity(
         radioGroup: RadioGroup,
         dateText: TextView
     ) {
         val plasticTypeId = radioGroup.checkedRadioButtonId
         val currentId = UUID.randomUUID()
-
-        val userDao =
-            UserDatabase.getDataBase(requireActivity().application).userDao()
 
         when (resources.getResourceEntryName(plasticTypeId)) {
             "radio_standard_bag" -> {
@@ -100,10 +91,7 @@ class PlasticDialog : DialogFragment() {
                     PlasticType.STANDARD,
                     6.92
                 )
-                currentUser.plasticActivities.add(activity)
-                userDao.addPlasticActivity(activity)
-                currentUser.plasticPrint += 6.92
-                currentUser.carbonPrint += 6.92
+                plasticDialogViewModel.addPlasticActivity(activity)
             }
             "radio_strong_bag" -> {
                 val activity = PlasticActivity(
@@ -113,10 +101,7 @@ class PlasticDialog : DialogFragment() {
                     PlasticType.STRONG,
                     21.51
                 )
-                currentUser.plasticActivities.add(activity)
-                userDao.addPlasticActivity(activity)
-                currentUser.plasticPrint += 21.51
-                currentUser.carbonPrint += 21.51
+                plasticDialogViewModel.addPlasticActivity(activity)
             }
             "radio_one_use_bag" -> {
                 val activity = PlasticActivity(
@@ -126,10 +111,7 @@ class PlasticDialog : DialogFragment() {
                     PlasticType.ONE_USE,
                     1.58
                 )
-                currentUser.plasticActivities.add(activity)
-                userDao.addPlasticActivity(activity)
-                currentUser.plasticPrint += 1.58
-                currentUser.carbonPrint += 1.58
+                plasticDialogViewModel.addPlasticActivity(activity)
             }
             "radio_paper_bag" -> {
                 val activity = PlasticActivity(
@@ -139,10 +121,7 @@ class PlasticDialog : DialogFragment() {
                     PlasticType.PAPER,
                     5.52
                 )
-                currentUser.plasticActivities.add(activity)
-                userDao.addPlasticActivity(activity)
-                currentUser.plasticPrint += 5.52
-                currentUser.carbonPrint += 5.52
+                plasticDialogViewModel.addPlasticActivity(activity)
             }
         }
     }

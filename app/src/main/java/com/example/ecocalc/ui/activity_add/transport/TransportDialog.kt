@@ -1,4 +1,4 @@
-package com.example.ecocalc.ui.dialog
+package com.example.ecocalc.ui.activity_add.transport
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
@@ -9,22 +9,20 @@ import android.text.format.DateUtils
 import android.view.View
 import android.widget.Button
 import android.widget.RadioGroup
-import android.widget.TextClock
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import com.example.ecocalc.R
 import com.example.ecocalc.data.enums.TransportType
-import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
 import com.example.ecocalc.data.user_activity.TransportActivity
 import com.example.ecocalc.ui.dialog.utils.getActivityDate
-import kotlinx.coroutines.launch
 import java.util.*
 
 
-class TransportDialog : DialogFragment() {
+class TransportDialog(private val transportDialogViewModel: TransportDialogViewModel) :
+    DialogFragment() {
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
@@ -68,14 +66,7 @@ class TransportDialog : DialogFragment() {
             builder.setView(transportView)
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, id ->
-                        lifecycleScope.launch {
-                            addTransportActivity(radioGroup, dateText, kmText)
-                        }
-                        val userDao =
-                            UserDatabase.getDataBase(requireActivity().application).userDao()
-                        lifecycleScope.launch {
-                            userDao.updateUsers(currentUser)
-                        }
+                        addTransportActivity(radioGroup, dateText, kmText)
                         getDialog()?.cancel()
                     })
                 .setNegativeButton("Cancel",
@@ -87,17 +78,14 @@ class TransportDialog : DialogFragment() {
     }
 
 
-    private suspend fun addTransportActivity(
+    private fun addTransportActivity(
         radioGroup: RadioGroup,
         dateText: TextView,
         kmTextView: TextView
     ) {
         val transportTypeId = radioGroup.checkedRadioButtonId
         val currentId = UUID.randomUUID()
-        val userDao =
-            UserDatabase.getDataBase(requireActivity().application).userDao()
         val km: Double = kmTextView.text.toString().toDouble()
-
         val activity: TransportActivity
 
         when (resources.getResourceEntryName(transportTypeId)) {
@@ -111,10 +99,7 @@ class TransportDialog : DialogFragment() {
                     0.19 * km,
                     false
                 )
-                currentUser.transportActivities.add(activity)
-                userDao.addTransportActivity(activity)
-                currentUser.transportPrint += 0.19 * km
-                currentUser.carbonPrint += 0.19 * km
+                transportDialogViewModel.addTransportActivity(activity, 0.19)
             }
             "radio_train" -> {
                 activity = TransportActivity(
@@ -125,10 +110,7 @@ class TransportDialog : DialogFragment() {
                     0.41 * km,
                     false
                 )
-                currentUser.transportActivities.add(activity)
-                userDao.addTransportActivity(activity)
-                currentUser.transportPrint += 0.41 * km
-                currentUser.carbonPrint += 0.41 * km
+                transportDialogViewModel.addTransportActivity(activity, 0.41)
             }
             "radio_airplane" -> {
                 activity = TransportActivity(
@@ -139,10 +121,7 @@ class TransportDialog : DialogFragment() {
                     0.15 * km,
                     false
                 )
-                currentUser.transportActivities.add(activity)
-                userDao.addTransportActivity(activity)
-                currentUser.transportPrint += 0.15 * km
-                currentUser.carbonPrint += 0.15 * km
+                transportDialogViewModel.addTransportActivity(activity, 0.15)
             }
             "radio_no_fuel" -> {
                 activity = TransportActivity(
@@ -154,8 +133,7 @@ class TransportDialog : DialogFragment() {
                     0.0,
                     false
                 )
-                currentUser.transportActivities.add(activity)
-                userDao.addTransportActivity(activity)
+                transportDialogViewModel.addTransportActivity(activity, 0.0)
             }
         }
     }

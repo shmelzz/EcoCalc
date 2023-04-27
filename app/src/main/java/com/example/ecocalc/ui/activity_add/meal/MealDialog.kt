@@ -1,4 +1,4 @@
-package com.example.ecocalc.ui.dialog
+package com.example.ecocalc.ui.activity_add.meal
 
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -11,18 +11,14 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import com.example.ecocalc.R
 import com.example.ecocalc.data.enums.MealType
-import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
 import com.example.ecocalc.data.user_activity.MealActivity
 import com.example.ecocalc.ui.dialog.utils.getActivityDate
-import kotlinx.coroutines.*
 import java.util.*
-import kotlin.math.roundToInt
 
-class MealDialog : DialogFragment() {
+class MealDialog(private val mealDialogViewModel: MealDialogViewModel) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
@@ -67,14 +63,7 @@ class MealDialog : DialogFragment() {
             builder.setView(mealView)
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, id ->
-                        lifecycleScope.launch {
-                            addMealActivity(radioGroup, dateText)
-                        }
-                        val userDao =
-                            UserDatabase.getDataBase(requireActivity().application).userDao()
-                        lifecycleScope.launch {
-                            userDao.updateUsers(currentUser)
-                        }
+                        addMealActivity(radioGroup, dateText)
                         getDialog()?.cancel()
                     })
                 .setNegativeButton("Cancel",
@@ -86,7 +75,7 @@ class MealDialog : DialogFragment() {
     }
 
 
-    private suspend fun addMealActivity(
+    private fun addMealActivity(
         radioGroup: RadioGroup,
         dateText: TextView
     ) {
@@ -94,19 +83,13 @@ class MealDialog : DialogFragment() {
         val currentId = UUID.randomUUID()
         val activity: MealActivity
 
-        val userDao =
-            UserDatabase.getDataBase(requireActivity().application).userDao()
-
         when (resources.getResourceEntryName(mealTypeId)) {
             "radio_standard" -> {
                 activity = MealActivity(
                     currentId, currentUser.email, getActivityDate(dateText), MealType.STANDARD,
                     6.85
                 )
-                currentUser.mealActivities.add(activity)
-                userDao.addMealActivity(activity)
-                currentUser.mealPrint += 6.85
-                currentUser.carbonPrint += 6.85
+                mealDialogViewModel.addMealActivity(activity)
             }
             "radio_vegetarian" -> {
                 activity = MealActivity(
@@ -116,10 +99,7 @@ class MealDialog : DialogFragment() {
                     MealType.VEGETARIAN,
                     4.66
                 )
-                currentUser.mealActivities.add(activity)
-                userDao.addMealActivity(activity)
-                currentUser.mealPrint += 4.66
-                currentUser.carbonPrint += 4.66
+                mealDialogViewModel.addMealActivity(activity)
             }
             "radio_vegan" -> {
                 activity = MealActivity(
@@ -129,10 +109,7 @@ class MealDialog : DialogFragment() {
                     MealType.VEGAN,
                     4.11
                 )
-                currentUser.mealActivities.add(activity)
-                userDao.addMealActivity(activity)
-                currentUser.mealPrint += 4.11
-                currentUser.carbonPrint += 4.11
+                mealDialogViewModel.addMealActivity(activity)
             }
             "radio_meat" -> {
                 activity = MealActivity(
@@ -142,10 +119,7 @@ class MealDialog : DialogFragment() {
                     MealType.MEAT,
                     9.04
                 )
-                currentUser.mealActivities.add(activity)
-                userDao.addMealActivity(activity)
-                currentUser.mealPrint += 9.04
-                currentUser.carbonPrint += 9.04
+                mealDialogViewModel.addMealActivity(activity)
             }
         }
     }
