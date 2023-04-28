@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity_add.ActivityAddFragment">
+    tools:context=".ui.ui_elements.activity_add.ActivityAddFragment">
 
 
     <ProgressBar
