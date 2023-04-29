@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.databinding.FragmentGoalsBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -13,7 +14,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class GoalsFragment : Fragment() {
 
-   private val goalProgressArray = arrayOf(
+    private val goalProgressArray = arrayOf(
         "Explore",
         "In progress",
         "Finished"
@@ -38,7 +39,11 @@ class GoalsFragment : Fragment() {
         viewPager = binding.viewpager
         tabLayout = binding.goalsTabs
 
-        adapter = GoalsFragmentAdapter(activity!!.supportFragmentManager, lifecycle)
+        adapter = GoalsFragmentAdapter(
+            activity!!.supportFragmentManager,
+            lifecycle,
+            UserDatabase.getDataBase(requireActivity().application).userDao()
+        )
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

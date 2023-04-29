@@ -1,6 +1,7 @@
 package com.example.ecocalc.data.user
 
 import androidx.room.TypeConverter
+import com.example.ecocalc.data.enums.GoalProgress
 import com.example.ecocalc.data.enums.MealType
 import com.example.ecocalc.data.enums.PlasticType
 import com.example.ecocalc.data.enums.TransportType
@@ -42,5 +43,15 @@ class Converters {
     @TypeConverter
     fun toPlasticType(type: String): PlasticType {
         return PlasticType.valueOf(type)
+    }
+
+    @TypeConverter
+    fun fromGoalProgressType(type: GoalProgress): String {
+        return type.name
+    }
+
+    @TypeConverter
+    fun toGoalProgressType(type: String): GoalProgress {
+        return GoalProgress.valueOf(type)
     }
 }

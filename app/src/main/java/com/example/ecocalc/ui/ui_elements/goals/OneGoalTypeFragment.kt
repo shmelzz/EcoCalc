@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class OneGoalTypeFragment(
     goalProgress: GoalProgress,
-    // private val viewModel: OneGoalTypeViewModel
+    private val viewModel: OneGoalTypeViewModel
 ) :
     Fragment() {
 
@@ -34,35 +34,19 @@ class OneGoalTypeFragment(
         _binding = FragmentGoalListBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val userDao =
-            UserDatabase.getDataBase(requireActivity().application).userDao()
-        lifecycleScope.launch {
-            userDao.updateUsers(currentUser)
-        }
+//        val userDao =
+//            UserDatabase.getDataBase(requireActivity().application).userDao()
+//        lifecycleScope.launch {
+//            userDao.updateUsers(currentUser)
+//        }
         updateGoalsList()
         return root
     }
 
     private fun updateGoalsList() {
-        when (fragmentGoalProgress) {
-            GoalProgress.EXPLORE -> {
-                binding.goalsList.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = GoalCardAdapter(currentUser.goalsToExplore)
-                }
-            }
-            GoalProgress.IN_PROGRESS -> {
-                binding.goalsList.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = GoalCardAdapter(currentUser.inProgressGoals)
-                }
-            }
-            else -> {
-                binding.goalsList.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = GoalCardAdapter(currentUser.achievedGoals)
-                }
-            }
+        binding.goalsList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = GoalCardAdapter(viewModel.getGoals(fragmentGoalProgress), viewModel)
         }
     }
 

@@ -9,11 +9,12 @@ import androidx.room.TypeConverters
 import com.example.ecocalc.data.user_activity.MealActivity
 import com.example.ecocalc.data.user_activity.PlasticActivity
 import com.example.ecocalc.data.user_activity.TransportActivity
+import com.example.ecocalc.data.utils.Goal
 
 @TypeConverters(Converters::class)
 @Database(
     entities =
-    [User::class, MealActivity::class, TransportActivity::class, PlasticActivity::class],
+    [User::class, MealActivity::class, TransportActivity::class, PlasticActivity::class, Goal::class],
     version = 1, exportSchema = false
 )
 abstract class UserDatabase : RoomDatabase() {
@@ -32,9 +33,7 @@ abstract class UserDatabase : RoomDatabase() {
                 context.applicationContext,
                 UserDatabase::class.java,
                 "users_database"
-            ).allowMainThreadQueries().build()
-
-            // TODO УБРАТЬ allowMainThreadQueries - ТАК ПИСАТЬ НЕ НАДО
+            ).build()
 
             INSTANCE = instance
             return instance

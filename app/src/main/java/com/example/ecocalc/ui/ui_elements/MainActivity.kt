@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.ecocalc.R
+import com.example.ecocalc.data.enums.GoalProgress
 import com.example.ecocalc.data.user.User
 import com.example.ecocalc.data.user.UserDatabase
 import com.example.ecocalc.data.user.currentUser
@@ -56,14 +57,21 @@ class MainActivity : AppCompatActivity() {
             val userDao = UserDatabase.getDataBase(application).userDao()
             lifecycleScope.launch {
                 userDao.addUser(currentUser)
+                userDao.addGoals(currentUser.goalsToExplore)
             }
         } else {
             val userDao = UserDatabase.getDataBase(application).userDao()
             val email = intent.extras?.getString("username").toString()
-            currentUser = userDao.readUserData(email)
-            currentUser.mealActivities.addAll(userDao.readMealActivitiesForUser(email))
-            currentUser.transportActivities.addAll(userDao.readTransportActivitiesForUser(email))
-            currentUser.plasticActivities.addAll(userDao.readPlasticActivitiesForUser(email))
+            lifecycleScope.launch {
+                currentUser = userDao.readUserData(email)
+                currentUser.mealActivities.addAll(userDao.readMealActivitiesForUser(email))
+                currentUser.transportActivities.addAll(userDao.readTransportActivitiesForUser(email))
+                currentUser.plasticActivities.addAll(userDao.readPlasticActivitiesForUser(email))
+                val goals = userDao.readGoals(email)
+                currentUser.goalsToExplore.addAll(goals.filter { it.progress == GoalProgress.EXPLORE })
+                currentUser.inProgressGoals.addAll(goals.filter { it.progress == GoalProgress.IN_PROGRESS })
+                currentUser.achievedGoals.addAll(goals.filter { it.progress == GoalProgress.FINISHED })
+            }
         }
     }
 }
