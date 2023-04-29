@@ -33,12 +33,6 @@ class OneGoalTypeFragment(
     ): View? {
         _binding = FragmentGoalListBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-//        val userDao =
-//            UserDatabase.getDataBase(requireActivity().application).userDao()
-//        lifecycleScope.launch {
-//            userDao.updateUsers(currentUser)
-//        }
         updateGoalsList()
         return root
     }
